@@ -1,0 +1,82 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+.star-rating {
+    font-family: 'FontAwesome';
+}
+
+.star-rating > fieldset {
+    border: none;
+    display: inline-block;
+}
+
+.star-rating > fieldset:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+    clip: rect(0, 0, 0, 0);
+}
+
+.star-rating > fieldset:not(:checked) > label {
+    float: right;
+    width: 1em;
+    padding: 0 0.05em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 200%;
+    color: #efb810;
+}
+
+.star-rating > fieldset:not(:checked) > label:before {
+    content: '\f006  ';
+}
+
+.star-rating > fieldset:not(:checked) > label:hover,
+.star-rating > fieldset:not(:checked) > label:hover ~ label {
+    color: #efb810;
+    text-shadow: #efb810;
+}
+
+.star-rating > fieldset:not(:checked) > label:hover:before,
+.star-rating > fieldset:not(:checked) > label:hover ~ label:before {
+    content: '\f005  ';
+}
+
+.star-rating > fieldset > input:checked ~ label:before {
+    content: '\f005  ';
+}
+
+.star-rating > fieldset > label:active {
+    position: relative;
+    top: 2px;
+}
+
+textarea {
+    max-height: 400px !important;
+}
+
+html {
+    margin: 0 !important;
+    backdrop-filter: opacity(50%) !important;
+    min-height: 100% !important;
+}
+section{
+    height: 100%;
+}
+body {
+    background-image: url("../img/background.png");
+    background-size: cover;
+}
+
+h1 {
+    color: #61d9ec !important;
+    text-shadow: 0 1px 0 #343434, 0 2px 0 #343434, 0 3px 0 #343434, 0 4px 0 #343434, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
+}
+
+.card-img-top {
+    margin:0 auto;
+    width: 12.5rem !important;
+    height: 14rem !important;
+}
+.marginado{
+    margin-left: 8.5vw;
+}

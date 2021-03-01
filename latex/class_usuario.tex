@@ -1,0 +1,206 @@
+\hypertarget{class_usuario}{}\doxysection{Usuario Class Reference}
+\label{class_usuario}\index{Usuario@{Usuario}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_usuario_a6c390ca384a9c8204ebcbe22b68b8363}{\+\_\+\+\_\+construct}} (\$nombre=\char`\"{}\char`\"{}, \$password=\char`\"{}\char`\"{}, \$email=\char`\"{}\char`\"{}, \$permiso=\char`\"{}\char`\"{}, \$id=\char`\"{}\char`\"{})
+\item 
+\mbox{\hyperlink{class_usuario_a12251d0c022e9e21c137a105ff683f13}{get\+Id}} ()
+\item 
+\mbox{\hyperlink{class_usuario_a87313ad678fb2a2a8efb435cf0bdb9a0}{set\+Id}} (\$id)
+\item 
+\mbox{\hyperlink{class_usuario_a19ecce3d19e108b3bdfb5c8e74512062}{get\+Nombre}} ()
+\item 
+\mbox{\hyperlink{class_usuario_a9bf28877fffefe5d4d7aae9f9989fc79}{set\+Nombre}} (\$nombre)
+\item 
+\mbox{\hyperlink{class_usuario_a04e0957baeb7acde9c0c86556da2d43f}{get\+Password}} ()
+\item 
+\mbox{\hyperlink{class_usuario_a3e35c8d3dbb2c513c618a664389e0926}{set\+Password}} (\$password)
+\item 
+\mbox{\hyperlink{class_usuario_a02a01849f28e2535e888ae4ec87b20f2}{get\+Email}} ()
+\item 
+\mbox{\hyperlink{class_usuario_a5ef76eef42d2624386442eeb636d338c}{set\+Email}} (\$email)
+\item 
+\mbox{\hyperlink{class_usuario_a588edf7f16f735dfb6b4ce3c70fe4e41}{get\+Permiso}} ()
+\item 
+\mbox{\hyperlink{class_usuario_a4c3753b03f22ae596f2c52b55778c7e5}{set\+Permiso}} (\$permiso)
+\item 
+\mbox{\hyperlink{class_usuario_a3c19c8f52d436aeea3430ed92b68fef9}{logearse}} (\$nombre, \$password)
+\item 
+\mbox{\hyperlink{class_usuario_ae748ccd34e120486192495846d9d8e8d}{registrarse}} (\$datos)
+\item 
+\mbox{\hyperlink{class_usuario_afc73879b7fed72e3f2fbfdd48ba87f96}{editar\+Perfil}} (\$datos, \$avatar, \$banner)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class \mbox{\hyperlink{class_usuario}{Usuario}} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_usuario_a6c390ca384a9c8204ebcbe22b68b8363}\label{class_usuario_a6c390ca384a9c8204ebcbe22b68b8363}} 
+\index{Usuario@{Usuario}!\_\_construct@{\_\_construct}}
+\index{\_\_construct@{\_\_construct}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{\_\_construct()}{\_\_construct()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+construct (\begin{DoxyParamCaption}\item[{}]{\$nombre = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{\$password = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{\$email = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{\$permiso = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{\$id = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_usuario}{Usuario}} constructor. 
+\begin{DoxyParams}{Parameters}
+{\em \$id} & ID del usuario \\
+\hline
+{\em \$nombre} & nombre del usuario \\
+\hline
+{\em \$password} & contraseña del usuario \\
+\hline
+{\em \$email} & email del usuario \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_usuario_afc73879b7fed72e3f2fbfdd48ba87f96}\label{class_usuario_afc73879b7fed72e3f2fbfdd48ba87f96}} 
+\index{Usuario@{Usuario}!editarPerfil@{editarPerfil}}
+\index{editarPerfil@{editarPerfil}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{editarPerfil()}{editarPerfil()}}
+{\footnotesize\ttfamily editar\+Perfil (\begin{DoxyParamCaption}\item[{}]{\$datos,  }\item[{}]{\$avatar,  }\item[{}]{\$banner }\end{DoxyParamCaption})}
+
+Metodo que usa la base bd para actualizar un usuario 
+\begin{DoxyParams}{Parameters}
+{\em \$datos} & \$\+\_\+\+P\+O\+ST enviado por el formulario con los datos actualizados \\
+\hline
+{\em \$avatar} & Imagen avatar del usuario a actualizar \\
+\hline
+{\em \$banner} & Imagen banner del usuario a actualizar. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_usuario_a02a01849f28e2535e888ae4ec87b20f2}\label{class_usuario_a02a01849f28e2535e888ae4ec87b20f2}} 
+\index{Usuario@{Usuario}!getEmail@{getEmail}}
+\index{getEmail@{getEmail}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{getEmail()}{getEmail()}}
+{\footnotesize\ttfamily get\+Email (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_usuario_a12251d0c022e9e21c137a105ff683f13}\label{class_usuario_a12251d0c022e9e21c137a105ff683f13}} 
+\index{Usuario@{Usuario}!getId@{getId}}
+\index{getId@{getId}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_usuario_a19ecce3d19e108b3bdfb5c8e74512062}\label{class_usuario_a19ecce3d19e108b3bdfb5c8e74512062}} 
+\index{Usuario@{Usuario}!getNombre@{getNombre}}
+\index{getNombre@{getNombre}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{getNombre()}{getNombre()}}
+{\footnotesize\ttfamily get\+Nombre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_usuario_a04e0957baeb7acde9c0c86556da2d43f}\label{class_usuario_a04e0957baeb7acde9c0c86556da2d43f}} 
+\index{Usuario@{Usuario}!getPassword@{getPassword}}
+\index{getPassword@{getPassword}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{getPassword()}{getPassword()}}
+{\footnotesize\ttfamily get\+Password (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_usuario_a588edf7f16f735dfb6b4ce3c70fe4e41}\label{class_usuario_a588edf7f16f735dfb6b4ce3c70fe4e41}} 
+\index{Usuario@{Usuario}!getPermiso@{getPermiso}}
+\index{getPermiso@{getPermiso}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{getPermiso()}{getPermiso()}}
+{\footnotesize\ttfamily get\+Permiso (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_usuario_a3c19c8f52d436aeea3430ed92b68fef9}\label{class_usuario_a3c19c8f52d436aeea3430ed92b68fef9}} 
+\index{Usuario@{Usuario}!logearse@{logearse}}
+\index{logearse@{logearse}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{logearse()}{logearse()}}
+{\footnotesize\ttfamily logearse (\begin{DoxyParamCaption}\item[{}]{\$nombre,  }\item[{}]{\$password }\end{DoxyParamCaption})}
+
+Metodo para logearse en la aplicación que comprueba que el usuario y la contraseña introducidos sean correctos. 
+\begin{DoxyParams}{Parameters}
+{\em \$nombre} & nombre a comprobar en la bd \\
+\hline
+{\em \$password} & contraseña correspondiente a ese nombre en la bd \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool retorna true si es correcto o falso si falla. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_usuario_ae748ccd34e120486192495846d9d8e8d}\label{class_usuario_ae748ccd34e120486192495846d9d8e8d}} 
+\index{Usuario@{Usuario}!registrarse@{registrarse}}
+\index{registrarse@{registrarse}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{registrarse()}{registrarse()}}
+{\footnotesize\ttfamily registrarse (\begin{DoxyParamCaption}\item[{}]{\$datos }\end{DoxyParamCaption})}
+
+Metodo que usa la clase bd para insertar el registro. 
+\begin{DoxyParams}{Parameters}
+{\em \$datos} & \$\+\_\+\+P\+O\+ST enviado por el formulario con los datos de registro. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_usuario_a5ef76eef42d2624386442eeb636d338c}\label{class_usuario_a5ef76eef42d2624386442eeb636d338c}} 
+\index{Usuario@{Usuario}!setEmail@{setEmail}}
+\index{setEmail@{setEmail}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{setEmail()}{setEmail()}}
+{\footnotesize\ttfamily set\+Email (\begin{DoxyParamCaption}\item[{}]{\$email }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$email} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_usuario_a87313ad678fb2a2a8efb435cf0bdb9a0}\label{class_usuario_a87313ad678fb2a2a8efb435cf0bdb9a0}} 
+\index{Usuario@{Usuario}!setId@{setId}}
+\index{setId@{setId}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{setId()}{setId()}}
+{\footnotesize\ttfamily set\+Id (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_usuario_a9bf28877fffefe5d4d7aae9f9989fc79}\label{class_usuario_a9bf28877fffefe5d4d7aae9f9989fc79}} 
+\index{Usuario@{Usuario}!setNombre@{setNombre}}
+\index{setNombre@{setNombre}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{setNombre()}{setNombre()}}
+{\footnotesize\ttfamily set\+Nombre (\begin{DoxyParamCaption}\item[{}]{\$nombre }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$nombre} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_usuario_a3e35c8d3dbb2c513c618a664389e0926}\label{class_usuario_a3e35c8d3dbb2c513c618a664389e0926}} 
+\index{Usuario@{Usuario}!setPassword@{setPassword}}
+\index{setPassword@{setPassword}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{setPassword()}{setPassword()}}
+{\footnotesize\ttfamily set\+Password (\begin{DoxyParamCaption}\item[{}]{\$password }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$password} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_usuario_a4c3753b03f22ae596f2c52b55778c7e5}\label{class_usuario_a4c3753b03f22ae596f2c52b55778c7e5}} 
+\index{Usuario@{Usuario}!setPermiso@{setPermiso}}
+\index{setPermiso@{setPermiso}!Usuario@{Usuario}}
+\doxysubsubsection{\texorpdfstring{setPermiso()}{setPermiso()}}
+{\footnotesize\ttfamily set\+Permiso (\begin{DoxyParamCaption}\item[{}]{\$permiso }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$permiso} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+modelo/Usuario.\+php\end{DoxyCompactItemize}

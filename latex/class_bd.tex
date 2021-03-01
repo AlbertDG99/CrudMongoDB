@@ -1,0 +1,179 @@
+\hypertarget{class_bd}{}\doxysection{Bd Class Reference}
+\label{class_bd}\index{Bd@{Bd}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bd_a095c5d389db211932136b53f25f39685}{\+\_\+\+\_\+construct}} ()
+\item 
+\mbox{\hyperlink{class_bd_a28ffb9ebfb00a9a443e05f3b2f3bf9cb}{add\+Bd}} (\$tabla, \$datos, \$carpeta, \$foto)
+\item 
+\mbox{\hyperlink{class_bd_a5706c0c9a56fc8901b7705545728985d}{update\+BD}} (\$id, \$tabla, \$datos, \$foto=\char`\"{}\char`\"{}, \$carpeta=\char`\"{}\char`\"{})
+\item 
+\mbox{\hyperlink{class_bd_a90c2b8621b46ed9a96e82ddad7ff312c}{borrar\+Foto}} (\$id, \$tabla)
+\item 
+\mbox{\hyperlink{class_bd_a7411c8d099f62a5f9d7cf4dca046da90}{registro}} (\$tabla, \$datos)
+\item 
+\mbox{\hyperlink{class_bd_aed3c5ac2b95c8768a15e84bed425705a}{consulta}} (\$consulta)
+\item 
+\mbox{\hyperlink{class_bd_af2a4666f01e584050ce244dba06d6b38}{consulta\+One\+Row}} (\$\mbox{\hyperlink{class_bd_aed3c5ac2b95c8768a15e84bed425705a}{consulta}})
+\item 
+\mbox{\hyperlink{class_bd_af2472dd07649cd71fe08d9971a5a7a27}{disponibilidad}} (\$campo, \$dato)
+\item 
+\mbox{\hyperlink{class_bd_a6c75a827346e4b6478aa05caed21ba25}{numero\+Elementos}} ()
+\item 
+\mbox{\hyperlink{class_bd_afbe0ad0b8daab7cb79d29f6f5f524de3}{todo\+Ok}} (\$nombre, \$email)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_bd_a095c5d389db211932136b53f25f39685}\label{class_bd_a095c5d389db211932136b53f25f39685}} 
+\index{Bd@{Bd}!\_\_construct@{\_\_construct}}
+\index{\_\_construct@{\_\_construct}!Bd@{Bd}}
+\doxysubsubsection{\texorpdfstring{\_\_construct()}{\_\_construct()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+construct (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_bd}{Bd}} constructor. Constructor de la base de datos, que servirá para realizar todas las llamadas. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bd_a28ffb9ebfb00a9a443e05f3b2f3bf9cb}\label{class_bd_a28ffb9ebfb00a9a443e05f3b2f3bf9cb}} 
+\index{Bd@{Bd}!addBd@{addBd}}
+\index{addBd@{addBd}!Bd@{Bd}}
+\doxysubsubsection{\texorpdfstring{addBd()}{addBd()}}
+{\footnotesize\ttfamily add\+Bd (\begin{DoxyParamCaption}\item[{}]{\$tabla,  }\item[{}]{\$datos,  }\item[{}]{\$carpeta,  }\item[{}]{\$foto }\end{DoxyParamCaption})}
+
+Este metodo añade los elementos pasados por el post y la foto a la base de datos, y guarda la imagen en la carpeta correspondiente despues de realizar la validación. 
+\begin{DoxyParams}{Parameters}
+{\em \$tabla} & tabla de la base de datos en la que queremos almacenar los datos. \\
+\hline
+{\em \$datos} & elementos pasados por \$\+\_\+\+P\+O\+ST que serán extraidos en claves y valores para la inserción en BD. \\
+\hline
+{\em \$carpeta} & Carpeta en la que se insertarán las imagenes. \\
+\hline
+{\em \$foto} & Imagen de la cual se guardará el nombre en la Base de datos y el archivo en el servidor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool$\vert$mysqli\+\_\+result Retornará true si todo ha ido bien o false si ha fallado la inserción. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bd_a90c2b8621b46ed9a96e82ddad7ff312c}\label{class_bd_a90c2b8621b46ed9a96e82ddad7ff312c}} 
+\index{Bd@{Bd}!borrarFoto@{borrarFoto}}
+\index{borrarFoto@{borrarFoto}!Bd@{Bd}}
+\doxysubsubsection{\texorpdfstring{borrarFoto()}{borrarFoto()}}
+{\footnotesize\ttfamily borrar\+Foto (\begin{DoxyParamCaption}\item[{}]{\$id,  }\item[{}]{\$tabla }\end{DoxyParamCaption})}
+
+Metodo para eliminar las imagenes del servidor realizando una llamada a la base de datos para obtener el nombre de dicha imagen asociada al ID proporcionado. 
+\begin{DoxyParams}{Parameters}
+{\em \$id} & ID de la imaagen a eliminar \\
+\hline
+{\em \$tabla} & Tabla en la que se encuentra el nombre de la imagen a eliminar. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bd_aed3c5ac2b95c8768a15e84bed425705a}\label{class_bd_aed3c5ac2b95c8768a15e84bed425705a}} 
+\index{Bd@{Bd}!consulta@{consulta}}
+\index{consulta@{consulta}!Bd@{Bd}}
+\doxysubsubsection{\texorpdfstring{consulta()}{consulta()}}
+{\footnotesize\ttfamily consulta (\begin{DoxyParamCaption}\item[{}]{\$consulta }\end{DoxyParamCaption})}
+
+Metodo usado por las demás clases para realizar llamadas a la base de datos 
+\begin{DoxyParams}{Parameters}
+{\em \$consulta} & consulta en M\+Y\+S\+QL que se realizará a la bd. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool$\vert$mysqli\+\_\+result Retrorna lo encontrado. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bd_af2a4666f01e584050ce244dba06d6b38}\label{class_bd_af2a4666f01e584050ce244dba06d6b38}} 
+\index{Bd@{Bd}!consultaOneRow@{consultaOneRow}}
+\index{consultaOneRow@{consultaOneRow}!Bd@{Bd}}
+\doxysubsubsection{\texorpdfstring{consultaOneRow()}{consultaOneRow()}}
+{\footnotesize\ttfamily consulta\+One\+Row (\begin{DoxyParamCaption}\item[{}]{\$consulta }\end{DoxyParamCaption})}
+
+Metodo usado por las demás clases para realizar consultas a la base de datos y retornar varios datos en un array 
+\begin{DoxyParams}{Parameters}
+{\em \$consulta} & consulta en M\+Y\+S\+QL que se realizará a la bd. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string\mbox{[}\mbox{]}$\vert$null elementos retornados de la BD. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bd_af2472dd07649cd71fe08d9971a5a7a27}\label{class_bd_af2472dd07649cd71fe08d9971a5a7a27}} 
+\index{Bd@{Bd}!disponibilidad@{disponibilidad}}
+\index{disponibilidad@{disponibilidad}!Bd@{Bd}}
+\doxysubsubsection{\texorpdfstring{disponibilidad()}{disponibilidad()}}
+{\footnotesize\ttfamily disponibilidad (\begin{DoxyParamCaption}\item[{}]{\$campo,  }\item[{}]{\$dato }\end{DoxyParamCaption})}
+
+Método usado para comprobar si ya existe un elemento en la base de datos, para evitar repeticiones. 
+\begin{DoxyParams}{Parameters}
+{\em \$campo} & 1er dato a comparar \\
+\hline
+{\em \$dato} & 2ndo dato a comparar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool devuelve true si no ha encontrado ninguna coincidencia o false si si. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bd_a6c75a827346e4b6478aa05caed21ba25}\label{class_bd_a6c75a827346e4b6478aa05caed21ba25}} 
+\index{Bd@{Bd}!numeroElementos@{numeroElementos}}
+\index{numeroElementos@{numeroElementos}!Bd@{Bd}}
+\doxysubsubsection{\texorpdfstring{numeroElementos()}{numeroElementos()}}
+{\footnotesize\ttfamily numero\+Elementos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Metodo para contar el numero de elementos de un array. \begin{DoxyReturn}{Returns}
+mixed Retorna el numero de elementos. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bd_a7411c8d099f62a5f9d7cf4dca046da90}\label{class_bd_a7411c8d099f62a5f9d7cf4dca046da90}} 
+\index{Bd@{Bd}!registro@{registro}}
+\index{registro@{registro}!Bd@{Bd}}
+\doxysubsubsection{\texorpdfstring{registro()}{registro()}}
+{\footnotesize\ttfamily registro (\begin{DoxyParamCaption}\item[{}]{\$tabla,  }\item[{}]{\$datos }\end{DoxyParamCaption})}
+
+Función que registra al usuario con su usuario, contraseña, email y nivel de permisos 
+\begin{DoxyParams}{Parameters}
+{\em \$tabla} & Tabla en la que se guardarán los datos enviados. \\
+\hline
+{\em \$datos} & Datos y credenciales del usuario a guardar en la base de datos \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool$\vert$mysqli\+\_\+result Devuelve true si todo es correcto o false si se produce algun error para evitar falsos registros. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bd_afbe0ad0b8daab7cb79d29f6f5f524de3}\label{class_bd_afbe0ad0b8daab7cb79d29f6f5f524de3}} 
+\index{Bd@{Bd}!todoOk@{todoOk}}
+\index{todoOk@{todoOk}!Bd@{Bd}}
+\doxysubsubsection{\texorpdfstring{todoOk()}{todoOk()}}
+{\footnotesize\ttfamily todo\+Ok (\begin{DoxyParamCaption}\item[{}]{\$nombre,  }\item[{}]{\$email }\end{DoxyParamCaption})}
+
+Metodo que comprueba la disponibilidad del usuario y el email para la gente que se quiera registrar 
+\begin{DoxyParams}{Parameters}
+{\em \$nombre} & Nombre a comprobar en la base de datos \\
+\hline
+{\em \$email} & Email a comprobrar en la base de datos. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool retorna true si no ha encontrado coincidencias o false si si. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bd_a5706c0c9a56fc8901b7705545728985d}\label{class_bd_a5706c0c9a56fc8901b7705545728985d}} 
+\index{Bd@{Bd}!updateBD@{updateBD}}
+\index{updateBD@{updateBD}!Bd@{Bd}}
+\doxysubsubsection{\texorpdfstring{updateBD()}{updateBD()}}
+{\footnotesize\ttfamily update\+BD (\begin{DoxyParamCaption}\item[{}]{\$id,  }\item[{}]{\$tabla,  }\item[{}]{\$datos,  }\item[{}]{\$foto = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{\$carpeta = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+Este metodo actualiza los elementos pasados por el post y la foto a la base de datos, y guarda la imagen en la carpeta correspondiente despues de realizar la validación, borrando la imagen a la que reemplazará. 
+\begin{DoxyParams}[1]{Parameters}
+ & {\em \$id} & ID del elemento del que se quieren actualizar los datos. \\
+\hline
+ & {\em \$tabla} & Nombre de la tabla en la que se quieren insertar los elementos \\
+\hline
+ & {\em \$datos} & elementos pasados por \$\+\_\+\+P\+O\+ST que serán extraidos en claves y valores para la inserción en BD. \\
+\hline
+string & {\em \$foto} & Imagen de la cual se guardará el nombre en la Base de datos y el archivo en el servidor, borrando del servidor a la que reemplaza. \\
+\hline
+string & {\em \$carpeta} & Carpeta en la que se guardarán las fotos en el servidor ftp. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+modelo/Bd.\+php\end{DoxyCompactItemize}

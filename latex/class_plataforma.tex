@@ -1,0 +1,70 @@
+\hypertarget{class_plataforma}{}\doxysection{Plataforma Class Reference}
+\label{class_plataforma}\index{Plataforma@{Plataforma}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_plataforma_aeb439a5c98ca81fb72a69ea98c992d16}{\+\_\+\+\_\+construct}} (\$id=\char`\"{}\char`\"{}, \$nombre=\char`\"{}\char`\"{}, \$icono=\char`\"{}\char`\"{}, \$descripción=\char`\"{}\char`\"{}, \$lista=\char`\"{}\char`\"{})
+\item 
+\mbox{\hyperlink{class_plataforma_addc3b0f44264f1950f155e4e7441f162}{obtener\+Plataformas}} ()
+\item 
+\mbox{\hyperlink{class_plataforma_affe808c8f14a92cca281c16c072a22f6}{mostrar\+Plataformas}} ()
+\item 
+\mbox{\hyperlink{class_plataforma_a815e0957c1088050dd8a123c6c7bd91b}{imprime\+Opciones}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class \mbox{\hyperlink{class_plataforma}{Plataforma}} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_plataforma_aeb439a5c98ca81fb72a69ea98c992d16}\label{class_plataforma_aeb439a5c98ca81fb72a69ea98c992d16}} 
+\index{Plataforma@{Plataforma}!\_\_construct@{\_\_construct}}
+\index{\_\_construct@{\_\_construct}!Plataforma@{Plataforma}}
+\doxysubsubsection{\texorpdfstring{\_\_construct()}{\_\_construct()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+construct (\begin{DoxyParamCaption}\item[{}]{\$id = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{\$nombre = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{\$icono = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{\$descripción = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{\$lista = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_plataforma}{Plataforma}} constructor. 
+\begin{DoxyParams}{Parameters}
+{\em \$id} & ID de la plataforma \\
+\hline
+{\em \$nombre} & Nombre de la plataforma \\
+\hline
+{\em \$icono} & Icono de la plataforma \\
+\hline
+{\em \$descripción} & Descripción de la plataorma \\
+\hline
+{\em \$lista} & Lista de plataformas. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_plataforma_a815e0957c1088050dd8a123c6c7bd91b}\label{class_plataforma_a815e0957c1088050dd8a123c6c7bd91b}} 
+\index{Plataforma@{Plataforma}!imprimeOpciones@{imprimeOpciones}}
+\index{imprimeOpciones@{imprimeOpciones}!Plataforma@{Plataforma}}
+\doxysubsubsection{\texorpdfstring{imprimeOpciones()}{imprimeOpciones()}}
+{\footnotesize\ttfamily imprime\+Opciones (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Metodo que crea texto html con las distintas plataformas de la \mbox{\hyperlink{class_plataforma}{Plataforma}}. \begin{DoxyReturn}{Returns}
+string retorna el html de cada plataforma 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_plataforma_affe808c8f14a92cca281c16c072a22f6}\label{class_plataforma_affe808c8f14a92cca281c16c072a22f6}} 
+\index{Plataforma@{Plataforma}!mostrarPlataformas@{mostrarPlataformas}}
+\index{mostrarPlataformas@{mostrarPlataformas}!Plataforma@{Plataforma}}
+\doxysubsubsection{\texorpdfstring{mostrarPlataformas()}{mostrarPlataformas()}}
+{\footnotesize\ttfamily mostrar\+Plataformas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Muestra las plafatormas usando el metodo imprime\+Opciones almacenadas en la lista, las cuales hemos obtenido del metodo Obtener\+Plataformas \begin{DoxyReturn}{Returns}
+string retorna el H\+T\+ML con las plataformas para mostrarse en la web como options. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_plataforma_addc3b0f44264f1950f155e4e7441f162}\label{class_plataforma_addc3b0f44264f1950f155e4e7441f162}} 
+\index{Plataforma@{Plataforma}!obtenerPlataformas@{obtenerPlataformas}}
+\index{obtenerPlataformas@{obtenerPlataformas}!Plataforma@{Plataforma}}
+\doxysubsubsection{\texorpdfstring{obtenerPlataformas()}{obtenerPlataformas()}}
+{\footnotesize\ttfamily obtener\+Plataformas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Metodo para obtener plataformas mediante una llamada a la base de datos y el uso de la función consulta de \mbox{\hyperlink{class_bd}{Bd}}, las cuales se guardarán en la lista. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+modelo/Plataforma.\+php\end{DoxyCompactItemize}
