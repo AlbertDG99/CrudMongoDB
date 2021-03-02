@@ -163,16 +163,11 @@ class Usuario
     // Registra un usuario siempre y cuando el nombre y el email no esten previamente en la base de datos
 
     /**
-     * Metodo que usa la clase bd para insertar el registro.
-     * @param $datos $_POST enviado por el formulario con los datos de registro.
+     * Metodo que inserta el objeto en la base de datos.
      */
-    public function registrarse($datos){
+    public function registrarse(){
 
-
-        $conexion = new Bd();
-
-        $conexion->registro($this->tabla,$datos);
-
+        DAOUsuarios::insertarUsuario($this);
     }
 
     /**
@@ -185,6 +180,14 @@ class Usuario
 
         $conexion =  new Bd();
         $conexion-> updateBd($this->tabla,$datos,$this->nombre);
+    }
+
+    public function llenarObj($datos)
+    {
+        $this->setNombre(addslashes($datos['nombre']));
+        $this->setEmail(addslashes($datos['email']));
+        $this->setPassword(addslashes($datos['password']));
+        $this->setPermiso(addslashes($datos['permiso']));
     }
 
 

@@ -11,12 +11,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="Catalogo.php">Catálogo</a>
             </li>
-            <li class="nav-item ">
-                <a class=" nav-link" >Sesión iniciada como: <?php echo($_SESSION['nombre'])?> </a>
-            </li>
-            <li class="nav-item ">
-                <a href="logout.php" class=" nav-link" >Cerrar Sesion</a>
-            </li>
         </ul>
     </div>
 </nav>

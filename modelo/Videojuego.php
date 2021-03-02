@@ -1,5 +1,26 @@
 <?php
-require_once("Bd.php");
+
+class listaVideojuegos{
+
+private $lista;
+
+    public function __construct(){
+
+        $this->lista = array();
+
+    }
+
+    public function obtenerLista(){
+        $rows = DAOVideojuegos::listar();
+        foreach ($rows as $document) {
+            $videojuego = json_decode(json_encode($document),true);
+            $id = implode($videojuego["_id"]);
+            array_push($this->lista,new Videojuego($id,$videojuego["nombre"],$videojuego["plataforma"],$videojuego["genero"],$videojuego["fecha"],$videojuego["imagen"],$videojuego["valoracion"],$videojuego["comentario"]) );
+        }
+    }
+}
+
+
 
 /**
  * Class Videojuego
@@ -39,10 +60,6 @@ class Videojuego
      */
     private $comentario;
     /**
-     * @var array lista de videojuegos
-     */
-    private $lista;
-    /**
      * @var string carpeta en la que se guardarán las imagenes de los videojuegos
      */
     private $carpeta;
@@ -57,9 +74,8 @@ class Videojuego
      * @param $imagen
      * @param $valoracion
      * @param $comentario
-     * @param $lista
      */
-    public function __construct($id = "", $nombre = "", $plataforma = "", $genero = "", $fecha = "", $imagen = "", $valoracion = "", $comentario = "", $lista = "")
+    public function __construct($id = "", $nombre = "", $plataforma = "", $genero = "", $fecha = "", $imagen = "", $valoracion = "", $comentario = "")
     {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -69,7 +85,6 @@ class Videojuego
         $this->imagen = $imagen;
         $this->valoracion = $valoracion;
         $this->comentario = $comentario;
-        $this->lista = array();
         $this->carpeta = "img/ImagenesVideojuegos/";
     }
 
@@ -201,17 +216,31 @@ class Videojuego
         $this->comentario = $comentario;
     }
 
-    /**
-     * Metodo para insertar un videojuego en la base de datos haciendose uso del metodo addBd de la clase Bd.
-     * @param $datos $_POST con los datos del formulario de inserción de videojuego
-     * @param $foto imagen del videojuego.
-     */
-    public function insertarVideojuego($datos, $foto)
+    public function llenarObj($datos)
     {
-        $conexion = new Bd();
 
-        $conexion->addBd("Videojuegos", $datos, $this->carpeta, $foto);
+        $this->setId($datos['id']);
+        $this->setNombre($datos['plataforma']);
+        $this->setPlataforma($datos['plataforma']);
+        $this->setGenero($datos['genero']);
+        $this->setFecha($datos['fecha']);
+        $this->setValoracion($datos['valoracion']);
+        $this->setComentario($datos['comentario']);
 
+
+    }
+
+    /**
+     * Metodo para insertar un videojuego en la base de datos
+     */
+    public function insertarVideojuego($foto)
+    {
+        if($foto['name'] !=""){
+            $ruta=subirFoto($foto,$this->carpeta);
+
+            $this->setImagen($ruta);
+        }
+        DAOVideojuegos::insertarVideojuego($this);
     }
 
     /**
@@ -220,18 +249,19 @@ class Videojuego
      * @param $id ID del videojuego a actualizar.
      * @param $foto imagen del videojuego.
      */
+    /*
     public function ActualizarVideojuego($datos, $id, $foto)
     {
-        $conexion = new Bd();
 
-        $conexion->updateBd($id, "videojuegos", $datos, $foto, "img/ImagenesVideojuegos/");
+        DAOVideojuegos::updateVideojuego($this);
 
     }
-
+*/
     /**
      * Metodo para obtener videojuegos mediante su ID con una select a la base de datos, guardando lo obtenido en los atributos del objeto.
      * @param $id ID del videojuego a obtener.
      */
+    /*
     public function obtenerVideojuegosID($id)
     {
         $sql = "select videojuegos.id, videojuegos.nombre, plataformas.nombre,videojuegos.genero,videojuegos.fecha,videojuegos.imagen,videojuegos.valoracion,videojuegos.comentario FROM videojuegos left join plataformas on videojuegos.plataforma=
@@ -254,31 +284,22 @@ plataformas.id where videojuegos.id = " . $id;
 
         }
     }
-
+*/
     /**
      * Metodo para obtener todos los videojuegos o los deseados mediante la busqueda
      * @param $busqueda nombre del videojuego a buscar.
      */
+
     public function obtenerVideojuegos($busqueda)
     {
-        $sql = "select videojuegos.id, videojuegos.nombre, plataformas.nombre,videojuegos.genero,videojuegos.fecha,videojuegos.imagen,videojuegos.valoracion,videojuegos.comentario FROM videojuegos left join plataformas on videojuegos.plataforma=
-plataformas.id where videojuegos.nombre like '%" . $busqueda . "%'";
-        $conexion = new Bd();
-        $res = $conexion->consulta($sql);
-
-        while (list($id, $nombre, $plataforma, $genero, $fecha, $imagen, $valoracion, $comentario) = mysqli_fetch_array($res)) {
-            if ($imagen == "")
-                $juego = new Videojuego($id, $nombre, $plataforma, $genero, $fecha, "default.jpg", $valoracion, $comentario);
-            else
-                $juego = new Videojuego($id, $nombre, $plataforma, $genero, $fecha, $imagen, $valoracion, $comentario);
-            array_push($this->lista, $juego);
-        }
+DAOVideojuegos::listarVideojuegos();
     }
 
     /**
      * Borra la imagen de un videojuego de la base de datos buscandola por ID
      * @param $id ID del videojuego del que queremos borrar la imagen
      */
+    /*
     public function borrarImagen($id)
     {
         $conexion = new Bd();
@@ -287,11 +308,12 @@ plataformas.id where videojuegos.nombre like '%" . $busqueda . "%'";
         $conexion->borrarFoto($id, "videojuegos");
 
     }
-
+*/
     /**
      * Metodo para borrar un videojuego de la base de datos y su imagen correspondiente del servidor.
      * @param $id ID del videojuego a borrar
      */
+    /*
     public function borrarVideojuego($id)
     {
         $conexion = new Bd();
@@ -300,11 +322,12 @@ plataformas.id where videojuegos.nombre like '%" . $busqueda . "%'";
         $conexion->borrarFoto($id, "videojuegos");
 
     }
-
+*/
     /**
      * Metodo para mostrar todos los videojuegos previamente obtenidos en html usando la función.
      * @return string HTML Con los videojuegos bien mostrados.
      */
+    /*
     public function mostrarVideojuegos()
     {
 
@@ -315,11 +338,13 @@ plataformas.id where videojuegos.nombre like '%" . $busqueda . "%'";
 
         return $html;
     }
+    */
 
     /**
      * Metodo para crear la 'card' de cada videojuego con sus atributos correspondientes y bien cumplimentadas.
      * @return string devuelve la tarjeta con todo su html.
      */
+    /*
     public function imprimeteEnTr()
     {
         $html = "
@@ -346,4 +371,5 @@ plataformas.id where videojuegos.nombre like '%" . $busqueda . "%'";
 ";
         return $html;
     }
+    */
 }
