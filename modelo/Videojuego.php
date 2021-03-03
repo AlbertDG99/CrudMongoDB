@@ -1,25 +1,42 @@
 <?php
 
-class listaVideojuegos{
+class listaVideojuegos
+{
 
-private $lista;
+    private $lista;
 
-    public function __construct(){
+    public function __construct()
+    {
 
         $this->lista = array();
 
     }
 
-    public function obtenerLista(){
-        $rows = DAOVideojuegos::listar();
+    public function obtenerLista()
+    {
+        $rows = DAOVideojuegos::listarVideojuegos();
         foreach ($rows as $document) {
-            $videojuego = json_decode(json_encode($document),true);
+            $videojuego = json_decode(json_encode($document), true);
             $id = implode($videojuego["_id"]);
-            array_push($this->lista,new Videojuego($id,$videojuego["nombre"],$videojuego["plataforma"],$videojuego["genero"],$videojuego["fecha"],$videojuego["imagen"],$videojuego["valoracion"],$videojuego["comentario"]) );
+            array_push($this->lista, new Videojuego($id, $videojuego["nombre"], $videojuego["plataforma"], $videojuego["genero"], $videojuego["fecha"], $videojuego["imagen"], $videojuego["valoracion"], $videojuego["comentario"]));
         }
     }
-}
 
+
+
+
+    public function mostrarVideojuegos()
+    {
+
+        $html = "";
+        for ($i = 0; $i < sizeof($this->lista); $i++) {
+            $html .= $this->lista[$i]->imprimeVideojuego();
+        }
+
+        return $html;
+    }
+
+}
 
 
 /**
@@ -235,8 +252,8 @@ class Videojuego
      */
     public function insertarVideojuego($foto)
     {
-        if($foto['name'] !=""){
-            $ruta=subirFoto($foto,$this->carpeta);
+        if ($foto['name'] != "") {
+            $ruta = subirFoto($foto, $this->carpeta);
 
             $this->setImagen($ruta);
         }
@@ -292,7 +309,7 @@ plataformas.id where videojuegos.id = " . $id;
 
     public function obtenerVideojuegos($busqueda)
     {
-DAOVideojuegos::listarVideojuegos();
+        DAOVideojuegos::listarVideojuegos();
     }
 
     /**
@@ -313,21 +330,17 @@ DAOVideojuegos::listarVideojuegos();
      * Metodo para borrar un videojuego de la base de datos y su imagen correspondiente del servidor.
      * @param $id ID del videojuego a borrar
      */
-    /*
+
     public function borrarVideojuego($id)
     {
-        $conexion = new Bd();
-        $sql = "DELETE from videojuegos WHERE id=" . $id;
-        $conexion->consulta($sql);
-        $conexion->borrarFoto($id, "videojuegos");
-
+        DAOVideojuegos::borrarVideojuego($id);
     }
-*/
+
     /**
      * Metodo para mostrar todos los videojuegos previamente obtenidos en html usando la función.
      * @return string HTML Con los videojuegos bien mostrados.
      */
-    /*
+
     public function mostrarVideojuegos()
     {
 
@@ -338,21 +351,21 @@ DAOVideojuegos::listarVideojuegos();
 
         return $html;
     }
-    */
+
 
     /**
      * Metodo para crear la 'card' de cada videojuego con sus atributos correspondientes y bien cumplimentadas.
      * @return string devuelve la tarjeta con todo su html.
      */
-    /*
-    public function imprimeteEnTr()
+
+    public function imprimeVideojuego()
     {
         $html = "
     <div class='card bg-dark text-white border-secondary mx-auto mb-3' style='width:16rem'>
       <div id='" . $this->id . "A' class='card-body d-flex flex-column'>
     <img class='card-img-top img-thumbnail bg-secondary mb-4 border-dark d-block mx-auto' src='" . $this->carpeta . $this->imagen . "'>
     <h5 class='card-title font-weight-bold border-bottom mr-auto'>" . $this->nombre . "</h5>
-    <a href='javascript:void();' class='btn btn-secondary align-self-end mt-auto mr-auto' onclick='masInformacion(" . $this->id . ")'>Más Información</a>
+    <a href='javascript:void();' class='btn btn-secondary align-self-end mt-auto mr-auto' onclick='masInformacion(`" . $this->id . "`)'>Más Información</a>
     </div >
       <div id='" . $this->id . "B' class='card-body flex-column' style='display:none'>
     <h5 class='card-title font-weight-bold border-bottom mr-auto'>" . $this->nombre . "</h5>
@@ -362,14 +375,14 @@ DAOVideojuegos::listarVideojuegos();
     <p class='card-text'>Plataforma: " . $this->plataforma . "</p>
     <p class='card-text font-weight-bold'>Valoracion: " . $this->valoracion . "/5</p>
     <div class='btn-toolbar align-self-end mt-auto mr-auto'>
-    <a href='javascript:void();' class='btn btn-secondary  mx-2 d-inline-block' onclick='cerrarInformacion(" . $this->id . ")'>Cerrar</a>
+    <a href='javascript:void();' class='btn btn-secondary  mx-2 d-inline-block' onclick='cerrarInformacion(`". $this->id . "`)'>Cerrar</a>
     <a href='Insertar.php?id=" . $this->id . "' class='btn btn-secondary  mx-2 d-inline-block'><img class='pb-1' style='width:1rem' src='img/editar.png'></a>
-    <a href='javascript:borrarJuego(" . $this->id . ")' class='btn btn-secondary  mx-2 d-inline-block'><img class='pb-1' style='width:1rem' src='img/eliminar.png'></a>
+    <a href='javascript:borrarJuego(`" . $this->id . "`)' class='btn btn-secondary  mx-2 d-inline-block'><img class='pb-1' style='width:1rem' src='img/eliminar.png'></a>
     </div>
     </div> 
 </div >
 ";
         return $html;
     }
-    */
+
 }

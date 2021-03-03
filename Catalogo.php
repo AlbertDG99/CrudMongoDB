@@ -1,13 +1,14 @@
 <?php
 require "modelo/Videojuego.php";
 require "modelo/funciones.php";
+require "modelo/DAOVideojuegos.php";
 
 $busqueda = "";
-$catalogo = new Videojuego();
+$catalogo = new listaVideojuegos();
 if (isset($_POST) && !empty($_POST)) {
     $busqueda = $_POST['buscar'];
 }
-$catalogo->obtenerVideojuegos($busqueda);
+$catalogo->obtenerLista($busqueda);
 ?>
 
 

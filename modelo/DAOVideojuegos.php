@@ -30,4 +30,16 @@ class DAOVideojuegos
         $query = new MongoDB\Driver\Query($filter);
         return $connection->executeQuery("GamesAdmin.videojuegos", $query);
     }
+
+    public static function borrarVideojuego($id)
+    {
+        $connection= new MongoDB\Driver\Manager("mongodb://localhost:27017");
+        $bulk = new MongoDB\Driver\BulkWrite;
+
+        $filter = ['_id' => new MongoDB\BSON\ObjectId($id)];
+        $bulk->delete($filter, ['limit' => 0]);
+
+        $connection->executeBulkWrite('GamesAdmin.videojuegos', $bulk);
+
+    }
 }
