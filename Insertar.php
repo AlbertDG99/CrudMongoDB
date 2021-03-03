@@ -13,21 +13,8 @@ $videojuego = new Videojuego();
 if (isset($_POST) && !empty($_POST)) {
     if (!empty($_POST['id'])) {
         $id = $_POST['id'];
-        unset($_POST['id']);
-        if ($_POST['nombre'] == $videojuego->getNombre())
-            unset($_POST['nombre']);
-        if ($_POST['plataforma'] == 0)
-            unset($_POST['plataforma']);
-        if ($_POST['genero'] == $videojuego->getGenero())
-            unset($_POST['genero']);
-        if ($_POST['fecha'] == $videojuego->getFecha())
-            unset($_POST['fecha']);
-        if ($_POST['valoracion'] == $videojuego->getValoracion())
-            unset($_POST['valoracion']);
-        if ($_POST['comentario'] == $videojuego->getComentario())
-            unset($_POST['comentario']);
-        echo($id);
-        $videojuego->ActualizarVideojuego($_POST, $id, $_FILES['imagen']);
+        $videojuego->llenarObj($_POST);
+        $videojuego->ActualizarVideojuego($id, $_FILES['imagen']);
         header('location:Catalogo.php');
     } else {
 
@@ -41,8 +28,15 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     $id = $_GET['id'];
     $videojuego->obtenerVideojuegosID($id);
-    $botonBorrar = "<div id='imagen'><img  class='card-img-top img-thumbnail bg-secondary mt-4 border-dark d-block mx-auto' src='" . $videojuego->getImagen() . "'></div><input type='button' class='btn btn-dark marginado btn-outline-light mt-2' value='Borrar Imagen' onclick='BorrarImagen(" . $id . ")'>";
+
+    if ($videojuego->getImagen() == $videojuego->getCarpeta() ."default.jpg")
+        $botonBorrar = "<div id='imagen'><img  class='card-img-top img-thumbnail bg-secondary mt-4 border-dark d-block mx-auto' src='" . $videojuego->getImagen() . "'></div>";
+    else
+        $botonBorrar = "<div id='imagen'><img  class='card-img-top img-thumbnail bg-secondary mt-4 border-dark d-block mx-auto' src='" . $videojuego->getImagen() . "'></div><input type='button' class='btn btn-dark marginado btn-outline-light mt-2' value='Borrar Imagen' onclick='BorrarImagen(`" . $id . "`)'>";
+
     $enviar = "Editar Videojuego";
+
+
 }
 
 ?>
@@ -80,7 +74,7 @@ include "includes/navbar.php";
                     <div class="form-group col-md-11 mr-auto">
                         <label class="font-weight-bold text-light">Plataforma</label>
                         <select name="plataforma" class="custom-select">
-                            <option value="0"
+                            <option value="<?php if ($videojuego->getPlataforma() != "") echo($videojuego->getPlataforma()); else echo("0")?>"
                                     selected><?php if ($videojuego->getPlataforma() != "") echo($videojuego->getPlataforma()); else echo("Selecciona una Plataforma") ?></option>
                             <?php
                             echo $plataforma->mostrarPlataformas();

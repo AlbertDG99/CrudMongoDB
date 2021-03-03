@@ -2,7 +2,7 @@
 require "../modelo/Videojuego.php";
 require_once "../modelo/DAOVideojuegos.php";
 
-$id = intval($_GET['id']);
+$id = $_GET['id'];
 
 //borro el elemento de la BD y su foro
 $juego = new Videojuego();
@@ -11,7 +11,7 @@ $lista = new listaVideojuegos();
 
 //Pido de nuevo la lista de elementos y la envio a ajax
 
-$juego->obtenerVideojuegos("");
+$lista->obtenerLista();
 
 
 echo $lista->mostrarVideojuegos();

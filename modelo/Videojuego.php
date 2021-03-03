@@ -14,15 +14,13 @@ class listaVideojuegos
 
     public function obtenerLista()
     {
-        $rows = DAOVideojuegos::listarVideojuegos();
+        $rows = DAOVideojuegos::getInstance()->listarVideojuegos();
         foreach ($rows as $document) {
             $videojuego = json_decode(json_encode($document), true);
             $id = implode($videojuego["_id"]);
             array_push($this->lista, new Videojuego($id, $videojuego["nombre"], $videojuego["plataforma"], $videojuego["genero"], $videojuego["fecha"], $videojuego["imagen"], $videojuego["valoracion"], $videojuego["comentario"]));
         }
     }
-
-
 
 
     public function mostrarVideojuegos()
@@ -80,6 +78,22 @@ class Videojuego
      * @var string carpeta en la que se guardarán las imagenes de los videojuegos
      */
     private $carpeta;
+
+    /**
+     * @return string
+     */
+    public function getCarpeta()
+    {
+        return $this->carpeta;
+    }
+
+    /**
+     * @param string $carpeta
+     */
+    public function setCarpeta($carpeta)
+    {
+        $this->carpeta = $carpeta;
+    }
 
     /**
      * Videojuego constructor.
@@ -237,7 +251,7 @@ class Videojuego
     {
 
         $this->setId($datos['id']);
-        $this->setNombre($datos['plataforma']);
+        $this->setNombre($datos['nombre']);
         $this->setPlataforma($datos['plataforma']);
         $this->setGenero($datos['genero']);
         $this->setFecha($datos['fecha']);
@@ -257,7 +271,7 @@ class Videojuego
 
             $this->setImagen($ruta);
         }
-        DAOVideojuegos::insertarVideojuego($this);
+        DAOVideojuegos::getInstance()->insertarVideojuego($this);
     }
 
     /**
@@ -266,42 +280,44 @@ class Videojuego
      * @param $id ID del videojuego a actualizar.
      * @param $foto imagen del videojuego.
      */
-    /*
-    public function ActualizarVideojuego($datos, $id, $foto)
-    {
 
-        DAOVideojuegos::updateVideojuego($this);
+    public function ActualizarVideojuego($id, $foto)
+    {
+        $this->setId($id);
+        if ($foto['name'] != "") {
+            $ruta = subirFoto($foto, $this->carpeta);
+
+            $this->setImagen($ruta);
+        }
+
+        DAOVideojuegos::getInstance()->updateVideojuego($this);
 
     }
-*/
+
     /**
      * Metodo para obtener videojuegos mediante su ID con una select a la base de datos, guardando lo obtenido en los atributos del objeto.
      * @param $id ID del videojuego a obtener.
      */
-    /*
+
     public function obtenerVideojuegosID($id)
     {
-        $sql = "select videojuegos.id, videojuegos.nombre, plataformas.nombre,videojuegos.genero,videojuegos.fecha,videojuegos.imagen,videojuegos.valoracion,videojuegos.comentario FROM videojuegos left join plataformas on videojuegos.plataforma=
-plataformas.id where videojuegos.id = " . $id;
-        $conexion = new Bd();
-        $res = $conexion->consulta($sql);
-        list($id, $nombre, $plataforma, $genero, $fecha, $imagen, $valoracion, $comentario) = mysqli_fetch_array($res);
-        if ($conexion->numeroElementos() > 0) {
+        $rows = DAOVideojuegos::getInstance()->obtenerVideojuego($id);
+        foreach ($rows as $document) {
+            $videojuego = json_decode(json_encode($document), true);
             $this->id = $id;
-            $this->nombre = $nombre;
-            $this->plataforma = $plataforma;
-            $this->genero = $genero;
-            $this->fecha = $fecha;
-            if ($imagen != "")
-                $this->imagen = $this->carpeta . $imagen;
+            $this->nombre = $videojuego["nombre"];
+            $this->plataforma = $videojuego["plataforma"];
+            $this->genero = $videojuego["genero"];
+            $this->fecha = $videojuego["fecha"];
+            if ($videojuego["imagen"] != "")
+                $this->imagen = $this->carpeta . $videojuego["imagen"];
             else
-                $this->imagen = $this->carpeta . "default.jpg";
-            $this->valoracion = $valoracion;
-            $this->comentario = $comentario;
-
+                $this->imagen = $this->carpeta ."default.jpg";
+            $this->valoracion = $videojuego["valoracion"];
+            $this->comentario = $videojuego["comentario"];
         }
     }
-*/
+
     /**
      * Metodo para obtener todos los videojuegos o los deseados mediante la busqueda
      * @param $busqueda nombre del videojuego a buscar.
@@ -309,23 +325,21 @@ plataformas.id where videojuegos.id = " . $id;
 
     public function obtenerVideojuegos($busqueda)
     {
-        DAOVideojuegos::listarVideojuegos();
+        DAOVideojuegos::getInstance()->listarVideojuegos();
     }
 
     /**
      * Borra la imagen de un videojuego de la base de datos buscandola por ID
      * @param $id ID del videojuego del que queremos borrar la imagen
      */
-    /*
+
     public function borrarImagen($id)
     {
-        $conexion = new Bd();
-        $sql = "UPDATE videojuegos SET imagen='' WHERE id=" . $id;
-        $conexion->consulta($sql);
-        $conexion->borrarFoto($id, "videojuegos");
-
+        DAOVideojuegos::getInstance()->borrarImagen($id);
+        if($this->imagen!=$this->carpeta."default.jpg")
+        unlink("./".$this->imagen);
     }
-*/
+
     /**
      * Metodo para borrar un videojuego de la base de datos y su imagen correspondiente del servidor.
      * @param $id ID del videojuego a borrar
@@ -333,7 +347,7 @@ plataformas.id where videojuegos.id = " . $id;
 
     public function borrarVideojuego($id)
     {
-        DAOVideojuegos::borrarVideojuego($id);
+        DAOVideojuegos::getInstance()->borrarVideojuego($id);
     }
 
     /**
@@ -375,7 +389,7 @@ plataformas.id where videojuegos.id = " . $id;
     <p class='card-text'>Plataforma: " . $this->plataforma . "</p>
     <p class='card-text font-weight-bold'>Valoracion: " . $this->valoracion . "/5</p>
     <div class='btn-toolbar align-self-end mt-auto mr-auto'>
-    <a href='javascript:void();' class='btn btn-secondary  mx-2 d-inline-block' onclick='cerrarInformacion(`". $this->id . "`)'>Cerrar</a>
+    <a href='javascript:void();' class='btn btn-secondary  mx-2 d-inline-block' onclick='cerrarInformacion(`" . $this->id . "`)'>Cerrar</a>
     <a href='Insertar.php?id=" . $this->id . "' class='btn btn-secondary  mx-2 d-inline-block'><img class='pb-1' style='width:1rem' src='img/editar.png'></a>
     <a href='javascript:borrarJuego(`" . $this->id . "`)' class='btn btn-secondary  mx-2 d-inline-block'><img class='pb-1' style='width:1rem' src='img/eliminar.png'></a>
     </div>

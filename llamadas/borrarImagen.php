@@ -1,9 +1,8 @@
 <?php
 require "../modelo/Videojuego.php";
-require_once "../modelo/Bd.php";
+require "../modelo/DAOVideojuegos.php";
 
-
-$id= intval($_GET['id']);
+$id= $_GET['id'];
 
 //borro la foto de la BD y su foto
 $videojuego= new Videojuego();
