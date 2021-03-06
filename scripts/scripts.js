@@ -250,3 +250,35 @@ function borrarJuegoResponse() {
         }
     }
 }
+
+buscar= new ajax();
+
+ buscador = document.getElementById("buscador");
+document.addEventListener("keypress", function(event) {
+    if (event.code === 'Enter') {
+        buscador = document.getElementById("buscador");
+        buscarJuego(buscador.value);
+    }
+});
+
+function buscarJuego(busqueda){
+
+        var myurl = 'llamadas/buscarJuego.php';
+        myRand = parseInt(Math.random() * 999999999999999);
+        modurl = myurl + '?rand=' + myRand + '&busqueda=' + busqueda;
+    buscar.open("GET", modurl, true);
+    buscar.onreadystatechange = buscarJuegoResponse;
+    buscar.send(null);
+
+}
+function buscarJuegoResponse() {
+    if (buscar.readyState == 4) {
+        if(buscar.status == 200) {
+
+            var juego = buscar.responseText;
+
+            document.getElementById('catalogo').innerHTML=juego;
+
+        }
+    }
+}

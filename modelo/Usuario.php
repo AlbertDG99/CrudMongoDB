@@ -140,19 +140,15 @@ class Usuario
      */
     public function logearse($nombre, $password){
         $ok =false;
-        $sql = "SELECT nombre, `password`, email, permiso FROM ".$this->tabla." 
-                WHERE nombre='".$nombre."' AND password='".$password."'";
 
-        $conexion = new Bd();
-        $res = $conexion->consultaOneRow($sql);
-        if($conexion->numeroElementos()>0){
-            $ok = true;
-            $this->nombre = $res['nombre'];
-            $this->password = $res['password'];
-            $this->permiso = $res['permiso'];
-            $this->email = $res['email'];
-        }else{
-            $ok = false;
+       $rows= DAOUsuario::getInstance()->loginUsuario($nombre, $password);
+        foreach ($rows as $document) {
+            $ok=true;
+            $usuario = json_decode(json_encode($document), true);
+            $this->id = implode($usuario["_id"]);;
+            $this->nombre = $usuario["nombre"];
+            $this->password = $usuario["password"];
+            $this->email = $usuario["email"];
         }
 
         return $ok;
@@ -165,9 +161,9 @@ class Usuario
     /**
      * Metodo que inserta el objeto en la base de datos.
      */
-    public function registrarse(){
+    public function registrarse($datos){
 
-        DAOUsuarios::insertarUsuario($this);
+        DAOUsuario::getInstance()->insertarUsuario($datos);
     }
 
     /**
@@ -188,6 +184,11 @@ class Usuario
         $this->setEmail(addslashes($datos['email']));
         $this->setPassword(addslashes($datos['password']));
         $this->setPermiso(addslashes($datos['permiso']));
+    }
+
+    public function todoOk($nombre, $email)
+    {
+       return DAOUsuario::getInstance()->todoOk($nombre, $email);
     }
 
 

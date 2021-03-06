@@ -4,6 +4,10 @@ require "modelo/funciones.php";
 require "modelo/Plataforma.php";
 require "modelo/DAOVideojuegos.php";
 
+session_start();
+if (empty($_SESSION['nombre'])) {
+    header('Location: login.php');
+}
 $botonBorrar = "";
 $id = "";
 $enviar = "Insertar Videojuego";
@@ -17,7 +21,7 @@ if (isset($_POST) && !empty($_POST)) {
         $videojuego->ActualizarVideojuego($id, $_FILES['imagen']);
         header('location:Catalogo.php');
     } else {
-
+        $_POST['idUsu']=$_SESSION['id'];
         $videojuego->llenarObj($_POST);
         $videojuego->insertarVideojuego($_FILES['imagen']);
         header('location:Catalogo.php');
@@ -29,7 +33,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = $_GET['id'];
     $videojuego->obtenerVideojuegosID($id);
 
-    if ($videojuego->getImagen() == $videojuego->getCarpeta() ."default.jpg")
+    if ($videojuego->getImagen() == $videojuego->getCarpeta() . "default.jpg")
         $botonBorrar = "<div id='imagen'><img  class='card-img-top img-thumbnail bg-secondary mt-4 border-dark d-block mx-auto' src='" . $videojuego->getImagen() . "'></div>";
     else
         $botonBorrar = "<div id='imagen'><img  class='card-img-top img-thumbnail bg-secondary mt-4 border-dark d-block mx-auto' src='" . $videojuego->getImagen() . "'></div><input type='button' class='btn btn-dark marginado btn-outline-light mt-2' value='Borrar Imagen' onclick='BorrarImagen(`" . $id . "`)'>";
@@ -74,8 +78,8 @@ include "includes/navbar.php";
                     <div class="form-group col-md-11 mr-auto">
                         <label class="font-weight-bold text-light">Plataforma</label>
                         <select name="plataforma" class="custom-select">
-                            <option value="<?php if ($videojuego->getPlataforma() != "") echo($videojuego->getPlataforma()); else echo("0")?>"
-                                    selected><?php if ($videojuego->getPlataforma() != "") echo($videojuego->getPlataforma()); else echo("Selecciona una Plataforma") ?></option>
+                            <option value="<?php if ($videojuego->getPlataforma() != "") echo($videojuego->getPlataforma()); else echo("PC") ?>"
+                                    selected><?php if ($videojuego->getPlataforma() != "") echo($videojuego->getPlataforma()); else echo("PC") ?></option>
                             <?php
                             echo $plataforma->mostrarPlataformas();
                             ?>

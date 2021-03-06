@@ -25,37 +25,41 @@ class DAOVideojuegos
 
 
 
-    public  function insertarVideojuego($videojuego)
+
+    public function insertarVideojuego($videojuego)
     {
 
         $bulk = new MongoDB\Driver\BulkWrite;
 
-        $bulk->insert(['nombre' => $videojuego->getNombre(), 'plataforma' => $videojuego->getPlataforma(), 'genero' => $videojuego->getGenero(), 'fecha' => $videojuego->getFecha(), 'valoracion' => $videojuego->getValoracion(), 'comentario' => $videojuego->getComentario(), 'imagen' => $videojuego->getImagen()]);
+        $bulk->insert(['nombre' => $videojuego->getNombre(), 'plataforma' => $videojuego->getPlataforma(), 'genero' => $videojuego->getGenero(), 'fecha' => $videojuego->getFecha(), 'valoracion' => $videojuego->getValoracion(), 'comentario' => $videojuego->getComentario(), 'imagen' => $videojuego->getImagen(), 'idUsu'=> $videojuego->getIdUsu()]);
 
         $this->connection->executeBulkWrite("GamesAdmin.videojuegos", $bulk);
 
     }
 
-    public  function updateVideojuego($videojuego)
+    public function updateVideojuego($videojuego)
     {
         $filter = ['_id' => new MongoDB\BSON\ObjectId($videojuego->getId())];
         $bulk = new MongoDB\Driver\BulkWrite;
-        if($videojuego->getImagen()!="")
-        $collation = ['$set' => ['nombre' => $videojuego->getNombre(), 'plataforma' => $videojuego->getPlataforma(), 'genero' => $videojuego->getGenero(), 'fecha' => $videojuego->getFecha(), 'valoracion' => $videojuego->getValoracion(), 'comentario' => $videojuego->getComentario(), 'imagen' => $videojuego->getImagen()]];
+        if ($videojuego->getImagen() != "")
+            $collation = ['$set' => ['nombre' => $videojuego->getNombre(), 'plataforma' => $videojuego->getPlataforma(), 'genero' => $videojuego->getGenero(), 'fecha' => $videojuego->getFecha(), 'valoracion' => $videojuego->getValoracion(), 'comentario' => $videojuego->getComentario(), 'imagen' => $videojuego->getImagen()]];
         else
             $collation = ['$set' => ['nombre' => $videojuego->getNombre(), 'plataforma' => $videojuego->getPlataforma(), 'genero' => $videojuego->getGenero(), 'fecha' => $videojuego->getFecha(), 'valoracion' => $videojuego->getValoracion(), 'comentario' => $videojuego->getComentario()]];
         $bulk->update($filter, $collation);
         $this->connection->executeBulkWrite('GamesAdmin.videojuegos', $bulk);
     }
 
-    public  function listarVideojuegos()
+    public function listarVideojuegos($busqueda)
     {
-        $filter = [];
+        if ($busqueda != "")
+            $filter = ['nombre' => new \MongoDB\BSON\Regex($busqueda)];
+        else
+            $filter = [];
         $query = new MongoDB\Driver\Query($filter);
         return $this->connection->executeQuery("GamesAdmin.videojuegos", $query);
     }
 
-    public  function borrarVideojuego($id)
+    public function borrarVideojuego($id)
     {
         $bulk = new MongoDB\Driver\BulkWrite;
 
@@ -66,14 +70,14 @@ class DAOVideojuegos
 
     }
 
-    public  function obtenerVideojuego($id)
+    public function obtenerVideojuego($id)
     {
         $filter = ['_id' => new MongoDB\BSON\ObjectId($id)];
         $query = new MongoDB\Driver\Query($filter);
         return $this->connection->executeQuery("GamesAdmin.videojuegos", $query);
     }
 
-    public  function borrarImagen($id)
+    public function borrarImagen($id)
     {
         $filter = ['_id' => new MongoDB\BSON\ObjectId($id)];
         $bulk = new MongoDB\Driver\BulkWrite;

@@ -12,9 +12,9 @@ class listaVideojuegos
 
     }
 
-    public function obtenerLista()
+    public function obtenerLista($busqueda)
     {
-        $rows = DAOVideojuegos::getInstance()->listarVideojuegos();
+        $rows = DAOVideojuegos::getInstance()->listarVideojuegos($busqueda);
         foreach ($rows as $document) {
             $videojuego = json_decode(json_encode($document), true);
             $id = implode($videojuego["_id"]);
@@ -79,6 +79,24 @@ class Videojuego
      */
     private $carpeta;
 
+    private $idUsu;
+
+    /**
+     * @return mixed
+     */
+    public function getIdUsu()
+    {
+        return $this->idUsu;
+    }
+
+    /**
+     * @param mixed $idUsu
+     */
+    public function setIdUsu($idUsu)
+    {
+        $this->idUsu = $idUsu;
+    }
+
     /**
      * @return string
      */
@@ -106,7 +124,7 @@ class Videojuego
      * @param $valoracion
      * @param $comentario
      */
-    public function __construct($id = "", $nombre = "", $plataforma = "", $genero = "", $fecha = "", $imagen = "", $valoracion = "", $comentario = "")
+    public function __construct($id = "", $nombre = "", $plataforma = "", $genero = "", $fecha = "", $imagen = "", $valoracion = "", $comentario = "", $idUsu="")
     {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -117,6 +135,7 @@ class Videojuego
         $this->valoracion = $valoracion;
         $this->comentario = $comentario;
         $this->carpeta = "img/ImagenesVideojuegos/";
+        $this->idUsu = $idUsu;
     }
 
     /**
@@ -247,6 +266,9 @@ class Videojuego
         $this->comentario = $comentario;
     }
 
+    /**
+     * Metodo que llena el objeto con los datos del POST
+     * @param $datos   POST  */
     public function llenarObj($datos)
     {
 
@@ -257,6 +279,7 @@ class Videojuego
         $this->setFecha($datos['fecha']);
         $this->setValoracion($datos['valoracion']);
         $this->setComentario($datos['comentario']);
+        $this->setIdUsu($datos['idUsu']);
 
 
     }
